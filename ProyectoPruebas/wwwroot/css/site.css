@@ -1,0 +1,49 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+
+}
+
+.tabla-hover:hover {
+    background-color: #4444;
+    
+}
+
+@media(max-width: 1200px){
+    .ocultar1200{
+        display:none;
+    }
+}
+
+@media(max-width: 768px){
+    .ocultar768{
+        display:none;
+    }
+}
+
+@media(max-width: 550px){
+    .ocultar550{
+        display:none;
+    }
+}
+
+.texto{
+    text-transform: lowercase
+}
+.texto::first-letter{
+    text-transform: uppercase
+}

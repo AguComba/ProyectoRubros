@@ -1,0 +1,114 @@
+﻿@model IEnumerable<ProyectoPruebas.Models.Articulo>
+@{
+    ViewData["Title"] = "Articulos";
+}
+
+<h1>Articulos</h1>
+
+<!-- Boton del modal -->
+<button type="button" class="btn btn-outline-primary mb-3 cursor-nuevo" onclick="AbrirModal(modalCrearArticulo)">
+    <i class="bi bi-plus-circle"></i> Crear Articulo 
+</button>
+
+@*Tabla*@
+<table class="table ">
+    <thead class="table-dark">
+        <tr >
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th class = 'ocultar1200'>Rubro</th>
+            <th>Sub Rubro</th>
+            <th class = 'text-center ocultar550'>Costo</th>
+            <th class = 'text-center ocultar768'>Ganancia</th>
+            <th class = 'text-center'>Precio de venta</th>
+            <th class = 'text-center'>Opciones</th>
+        </tr>
+    </thead>
+
+    <tbody id="tbody-articulos" >
+
+    </tbody>
+</table>
+@*Fin de la tabla*@
+
+@*Modal*@
+<div class="modal fade" id="modalCrearArticulo" data-bs-dismiss="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!--Head del Modal-->
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo-modal-articulo"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick='VaciarFormulario()' aria-label="Close"></button>
+            </div> 
+            <!--Fin Head del Modal-->
+
+            <!--Body del Modal-->
+            <div class="modal-body">
+            <form>
+                <div class = 'form-group'>
+
+                    <div class="alert alert-danger "id='alertArticulo'></div>
+                    <div class='mb-3'>
+                        <input type= "hidden" id='ArticuloID'/>
+                        <input placeholder="Ingrese una descripcion" type="text" autocomplete="off" id="nombreArticulo" class="form-control "/>
+                    </div>
+
+                    <div class='mb-3'>
+                        <label class='form-label'>Seleccionar rubro:</label>
+                        @Html.DropDownList("RubroID", null, htmlAttributes: new {@class = "form-control"})
+                    </div>
+
+                    <div class='mb-3'>
+                        <label class='form-label'>Seleccionar Sub Rubro</label>
+                        @Html.DropDownList("SubRubroID", null, htmlAttributes: new {@class = "form-control"})
+                    </div>
+                    
+                    <div class='row'>
+                        <div class="col-md">
+                                <label class='form-label'>Precio Costo:</label>
+                            <div class='input-group'>
+                                <span class='input-group-text'>$</span>
+                                <input type='number' class='form-control' value='0' style='text-transform:uppercase' autocomplete="off" required onKeyUp='CalcularImportes(1)' onKeyDown='CalcularImportes(1)' id='PrecioCosto'/>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                                <label class='form-label'>Porc. Ganancia:</label>
+                            <div class='input-group'>
+                                <input type='number' class='form-control' value='0' style='text-transform:uppercase' autocomplete="off" required onKeyUp='CalcularImportes(2)' onKeyDown='CalcularImportes(2)' id='PorcentajeGanancia'/>
+                                <span class='input-group-text'>%</span>   
+                            </div>
+                        </div>
+                        <div class="col-md">
+                                <label class='form-label'>Precio Venta:</label>
+                            <div class='input-group'>
+                                <span class='input-group-text'>$</span>   
+                                <input type='number' class='form-control' value='0' style='text-transform:uppercase' autocomplete="off" required onKeyUp='CalcularImportes(3)' onKeyDown='CalcularImportes(3)' id='PrecioVenta'/>
+                            </div>                  
+                        </div>   
+                    </div>
+
+                </div>
+            </form>
+            </div>   
+            <!--Fin Body del Modal-->     
+
+            @*Footer del Modal*@
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-info" id='BtnCrearEditar' onclick='GuardarArticulo()'> </button>
+                <button type="button" class="btn btn-outline-danger" onclick='VaciarFormulario()' data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            @*Fin Footer del Modal*@
+
+        </div>
+    </div>
+</div>
+@*Fin del Modal*@
+
+@section Scripts {
+    <script src="~/js/Articulo.js"></script>
+    <script>
+        window.onload = CompletarTablaArticulos();
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProyectoPruebas.Models.Rubro>
+
+@{
+    ViewData["Title"] = "Rubros";
+}
+
+<h1>Rubros</h1>
+
+<!-- Boton del modal -->
+<button type="button" class="btn btn-outline-primary mb-3 cursor-nuevo" onclick="AbrirModal(modalCrearRubro)">
+    <i class="bi bi-plus-circle"></i> Crear Rubro 
+</button>
+
+<table class="table ">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="body-rubros" >
+
+    </tbody>
+</table>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalCrearRubro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titulo-modal-rubro"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div>
+            <div class="alert alert-danger "id='alertRubro'>El campo descripcion no puede estar vacio</div> 
+            <input type= "hidden" id='RubroID'/>
+            <input placeholder="Ingrese una descripcion" type="text" id="inputRubro" class="form-control"/>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" onclick='GuardarRubro()'>Crear</button>
+        <button type="button" class="btn btn-outline-danger" onclick='VaciarFormulario()' data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+<script src="~/js/Rubro1.0.js"></script>
+<script>
+window.onload = CompletarTablaRubros();
+</script>
+}
